@@ -1,4 +1,4 @@
-Variants -- would like to track known variants of the M210 here.
+Would like to track different branded editions discovered in the wild here.
 
   * IOGEAR Mobile Digital Scribe (Firmware: NNN); ~$79 @ MicroCenter Warehouse, MI USA
 
