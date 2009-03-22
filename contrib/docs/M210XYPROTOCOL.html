@@ -1,0 +1,2698 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html >
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<base target="_top">
+<title>M210 protocol definition rev ...</title>
+<style type="text/css">
+/* default css */
+table {
+font-size: 1em;
+line-height: inherit;
+}
+tr {
+text-align: left;
+}
+div, address, ol, ul, li, option, select {
+margin-top: 0px;
+margin-bottom: 0px;
+}
+p {
+margin: 0px;
+}
+pre {
+font-family: Courier New;
+white-space: pre-wrap;
+margin:0;
+}
+body {
+margin: 6px;
+padding: 0px;
+font-family: Verdana, sans-serif;
+font-size: 10pt;
+background-color: #ffffff;
+}
+img {
+-moz-force-broken-image-icon: 1;
+}
+@media screen {
+html.pageview {
+background-color: #f3f3f3 !important;
+}
+body {
+min-height: 1100px;
+counter-reset: __goog_page__;
+}
+* html body {
+height: 1100px;
+}
+.pageview body {
+border-top: 1px solid #ccc;
+border-left: 1px solid #ccc;
+border-right: 2px solid #bbb;
+border-bottom: 2px solid #bbb;
+width: 648px !important;
+margin: 15px auto 25px;
+padding: 40px 50px;
+}
+/* IE6 */
+* html {
+overflow-y: scroll;
+}
+* html.pageview body {
+overflow-x: auto;
+}
+/* Prevent repaint errors when scrolling in Safari. This "Star-7" css hack
+targets Safari 3.1, but not WebKit nightlies and presumably Safari 4.
+That's OK because this bug is fixed in WebKit nightlies/Safari 4 :-). */
+html*#wys_frame::before {
+content: '\A0';
+position: fixed;
+overflow: hidden;
+width: 0;
+height: 0;
+top: 0;
+left: 0;
+}
+.writely-callout-data {
+display: none;
+*display: inline-block;
+*width: 0;
+*height: 0;
+*overflow: hidden;
+}
+.writely-footnote-marker {
+background-image: url('images/footnote_doc_icon.gif');
+background-color: transparent;
+background-repeat: no-repeat;
+width: 7px;
+overflow: hidden;
+height: 16px;
+vertical-align: top;
+-moz-user-select: none;
+}
+.editor .writely-footnote-marker {
+cursor: move;
+}
+.writely-footnote-marker-highlight {
+background-position: -15px 0;
+-moz-user-select: text;
+}
+.writely-footnote-hide-selection ::-moz-selection, .writely-footnote-hide-selection::-moz-selection {
+background: transparent;
+}
+.writely-footnote-hide-selection ::selection, .writely-footnote-hide-selection::selection {
+background: transparent;
+}
+.writely-footnote-hide-selection {
+cursor: move;
+}
+.editor .writely-comment-yellow {
+background-color: #FF9;
+background-position: -240px 0;
+}
+.editor .writely-comment-yellow-hover {
+background-color: #FF0;
+background-position: -224px 0;
+}
+.editor .writely-comment-blue {
+background-color: #C0D3FF;
+background-position: -16px 0;
+}
+.editor .writely-comment-blue-hover {
+background-color: #6292FE;
+background-position: 0 0;
+}
+.editor .writely-comment-orange {
+background-color: #FFDEAD;
+background-position: -80px 0;
+}
+.editor .writely-comment-orange-hover {
+background-color: #F90;
+background-position: -64px 0;
+}
+.editor .writely-comment-green {
+background-color: #99FBB3;
+background-position: -48px 0;
+}
+.editor .writely-comment-green-hover {
+background-color: #00F442;
+background-position: -32px 0;
+}
+.editor .writely-comment-cyan {
+background-color: #CFF;
+background-position: -208px 0;
+}
+.editor .writely-comment-cyan-hover {
+background-color: #0FF;
+background-position: -192px 0;
+}
+.editor .writely-comment-purple {
+background-color: #EBCCFF;
+background-position: -144px 0;
+}
+.editor .writely-comment-purple-hover {
+background-color: #90F;
+background-position: -128px 0;
+}
+.editor .writely-comment-magenta {
+background-color: #FCF;
+background-position: -112px 0;
+}
+.editor .writely-comment-magenta-hover {
+background-color: #F0F;
+background-position: -96px 0;
+}
+.editor .writely-comment-red {
+background-color: #FFCACA;
+background-position: -176px 0;
+}
+.editor .writely-comment-red-hover {
+background-color: #FF7A7A;
+background-position: -160px 0;
+}
+.editor .writely-comment-marker {
+background-image: url('images/markericons_horiz.gif');
+background-color: transparent;
+padding-right: 11px;
+background-repeat: no-repeat;
+width: 16px;
+height: 16px;
+-moz-user-select: none;
+}
+.editor .writely-comment-hidden {
+padding: 0;
+background: none;
+}
+.editor .writely-comment-marker-hidden {
+background: none;
+padding: 0;
+width: 0;
+}
+.editor .writely-comment-none {
+opacity: .2;
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+-moz-opacity: .2;
+}
+.editor .writely-comment-none-hover {
+opacity: .2;
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);
+-moz-opacity: .2;
+}
+.br_fix br:not(:-moz-last-node):not(:-moz-first-node) {
+position:relative;
+left: -1ex
+}
+.br_fix br+br {
+position: static !important
+}
+}
+h6 { font-size: 8pt }
+h5 { font-size: 8pt }
+h4 { font-size: 10pt }
+h3 { font-size: 12pt }
+h2 { font-size: 14pt }
+h1 { font-size: 18pt }
+blockquote {padding: 10px; border: 1px #DDD dashed }
+a img {border: 0}
+.pb {
+border-width: 0;
+page-break-after: always;
+/* We don't want this to be resizeable, so enforce a width and height
+using !important */
+height: 1px !important;
+width: 100% !important;
+}
+.editor .pb {
+border-top: 1px dashed #C0C0C0;
+border-bottom: 1px dashed #C0C0C0;
+}
+div.google_header, div.google_footer {
+position: relative;
+margin-top: 1em;
+margin-bottom: 1em;
+}
+/* Table of contents */
+.editor div.writely-toc {
+background-color: #f3f3f3;
+border: 1px solid #ccc;
+}
+.writely-toc > ol {
+padding-left: 3em;
+font-weight: bold;
+}
+ol.writely-toc-subheading {
+padding-left: 1em;
+font-weight: normal;
+}
+/* IE6 only */
+* html writely-toc ol {
+list-style-position: inside;
+}
+.writely-toc-none {
+list-style-type: none;
+}
+.writely-toc-decimal {
+list-style-type: decimal;
+}
+.writely-toc-upper-alpha {
+list-style-type: upper-alpha;
+}
+.writely-toc-lower-alpha {
+list-style-type: lower-alpha;
+}
+.writely-toc-upper-roman {
+list-style-type: upper-roman;
+}
+.writely-toc-lower-roman {
+list-style-type: lower-roman;
+}
+.writely-toc-disc {
+list-style-type: disc;
+}
+/* Ordered lists converted to numbered lists can preserve ordered types, and
+vice versa. This is confusing, so disallow it */
+ul[type="i"], ul[type="I"], ul[type="1"], ul[type="a"], ul[type="A"] {
+list-style-type: disc;
+}
+ol[type="disc"], ol[type="circle"], ol[type="square"] {
+list-style-type: decimal;
+}
+/* end default css */
+/* custom css */
+/* end custom css */
+/* ui edited css */
+body {
+font-family: Times New Roman;
+font-size: 12.0pt;
+line-height: normal;
+background-color: #ffffff;
+}
+/* end ui edited css */
+/* editor CSS */
+.editor a:visited {color: #551A8B}
+.editor table.zeroBorder {border: 1px dotted gray}
+.editor table.zeroBorder td {border: 1px dotted gray}
+.editor table.zeroBorder th {border: 1px dotted gray}
+.editor div.google_header, .editor div.google_footer {
+border: 2px #DDDDDD dashed;
+position: static;
+width: 100%;
+min-height: 2em;
+}
+.editor .misspell {background-color: yellow}
+.editor .writely-comment {
+font-size: 9pt;
+line-height: 1.4;
+padding: 1px;
+border: 1px dashed #C0C0C0
+}
+/* end editor CSS */
+</style>
+<style>
+body {
+margin: 0px;
+}
+#doc-contents {
+margin: 6px;
+}
+#google-view-footer {
+clear: both;
+border-top: thin solid;
+padding-top: 0.3em;
+padding-bottom: 0.3em;
+}
+a.google-small-link:link, a.google-small-link:visited {
+color:#112ABB;
+font-family:Arial,Sans-serif;
+font-size:11px !important;
+}
+body, p, div, td {
+direction: inherit;
+}
+@media print {
+#google-view-footer {
+display: none;
+}
+}
+</style>
+<script>
+function viewOnLoad() {
+if (document.location.href.indexOf('spi=1') != -1) {
+if (navigator.userAgent.toLowerCase().indexOf('msie') != -1) {
+window.print();
+} else {
+window.setTimeout(window.print, 10);
+}
+}
+if (document.location.href.indexOf('hgd=1') != -1) {
+var footer = document.getElementById("google-view-footer");
+if (footer) {
+footer.style.display = 'none';
+}
+}
+}
+</script>
+</head>
+<body>
+<div id="doc-contents">
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B><U><FONT SIZE=5>M210
+protocol definition </FONT></U></B>
+</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B><U>(Rev
+1.04)</U></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">M210 is a USB HID
+composite device with two interfaces:</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">	Interface 0: vendor
+defined. (64 bytes interrupt transfer).</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">	Interface 1:
+digitizer. (6 bytes interrupt transfer).</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Endpoint description:</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+Endpoint 0:	control endpoint use for enumeration and transferring
+command from host to device.</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+Endpoint 1: IN endpoint use for transferring data from device to
+host on interface 0.
+</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+Endpoint 2:	IN endpoint use for transferring data from device to host
+on interface
+1 (Tablet mode).</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">M210 device work in two
+modes:</P>
+<P CLASS="western" style=" margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B>Mobile mode:</B> XY
+coordinate saved in the memory.</P>
+<P CLASS="western" style=" margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+<B>Connected mode: </B>The communication between the M210 and
+the USB host is divided to:</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+1. Host send to device: Special commands (Host commands).</P>
+<P CLASS="western" style="margin-left: 1in; margin-bottom: 0in">
+2. Device send to host:
+</P>
+<P CLASS="western" STYLE="margin-left: 2in; margin-bottom: 0in">a.
+Data packets (XY mode, Tablet mode).
+</P>
+<P CLASS="western" style="margin-left: 1.5in; margin-bottom: 0in">
+b. Answer for received commands.</P>
+<P CLASS="western" STYLE="margin-left: 2in; margin-bottom: 0in">c.
+Device commands.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in; page-break-before: always">
+<B><FONT SIZE=4><font size="5">1. Host to Device.</font></FONT></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><FONT SIZE=4>Special
+commands:</FONT></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">The special commands
+are send to the device via control endpoint (endpoint 0) by Set
+Report request.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">The commands&nbsp;are:</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Version
+request &ndash; the host request from device ID and version, as a
+result the</P>
+<P CLASS="western" STYLE="margin-left: 1.71in; margin-bottom: 0in">device
+returns to the host the asked information via endpoint1.</P>
+<P CLASS="western" STYLE="margin-left: 1.71in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Operation
+mode command &ndash; the host send to device in which operation mode</P>
+<P CLASS="western" STYLE="margin-left: 1.71in; margin-bottom: 0in">(XY
+or Tablet) to work and which LED (Pen or mouse) to light.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">	</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in">Scale
+&amp; Orientation command &ndash; the host send to device the
+orientation of the</P>
+<P CLASS="western" STYLE="margin-left: 1.71in; margin-bottom: 0in">unit
+and the scaling of the active area size in tablet mode.
+</P>
+<P CLASS="western" STYLE="margin-left: 1.71in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in">Erase
+memory - the host send erase memory command to the unit.</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Upload
+request - the host request from device the saved note, as a result
+the</P>
+<P CLASS="western" STYLE="margin-left: 1.71in; margin-bottom: 0in">device
+returns to the host the asked information via endpoint1.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in; page-break-before: always">
+<B><I>Version request<FONT SIZE=4>:</FONT></I></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Host	<FONT FACE="Wingdings">&#61664;</FONT>	Device</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=277 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=68>
+<COL WIDTH=83>
+<COL WIDTH=76>
+<TR VALIGN=TOP>
+<TD WIDTH=68 HEIGHT=22>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of
+</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=76>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Version</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Command</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=68 HEIGHT=22>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER>0x01</P>
+</TD>
+<TD WIDTH=76>
+<P CLASS="western" ALIGN=CENTER>0x95</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B>(Device Answer)</B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Device	<FONT FACE="Wingdings">&#61664;</FONT>	Host</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">
+</P>
+<TABLE WIDTH=596 BORDER=3 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=37>
+<COL WIDTH=140>
+<COL WIDTH=30>
+<COL WIDTH=30>
+<COL WIDTH=30>
+<COL WIDTH=30>
+<COL WIDTH=33>
+<COL WIDTH=28>
+<COL WIDTH=36>
+<COL WIDTH=35>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER><B>Byte #</B></P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Byte</B></P>
+<P CLASS="western" ALIGN=CENTER><B>Name</B></P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER><B>7</B></P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER><B>6</B></P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER><B>5</B></P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER><B>4</B></P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER><B>3</B></P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER><B>2</B></P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER><B>1</B></P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER><B>0</B></P>
+</TD>
+</TR>
+<TR></TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><FONT SIZE=2>SPECIAL_COMMAND</FONT></P>
+<P CLASS="western" ALIGN=CENTER>(0x80)</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Command version (0xA9)</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>2</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Product
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(0x28)</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>3</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Firmware version high
+</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>4</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Firmware version low</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>5</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Analog version high</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>6</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Analog version low</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>7</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Pad Version High</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>8</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Pad Version Low</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>9</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>Analog Product ID (0x0E)</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=36>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=37>
+<P CLASS="western" ALIGN=CENTER>10</P>
+</TD>
+<TD WIDTH=140>
+<P CLASS="western" ALIGN=CENTER>TAB_MODE</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=30>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=33>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=28>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD COLSPAN=2 WIDTH=87>
+<P CLASS="western" ALIGN=CENTER>MODE</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">
+MODE:</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x00 Reserve.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x01 XY mode.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x02 Tablet mode.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x03 Mobile mode.</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in; page-break-before: always">
+<I><B>Operation mode command:</B></I></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Set operation mode (XY
+/ tablet) and mouse/pen LED.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Host	<FONT FACE="Wingdings">&#61664;</FONT>	Device</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<TABLE WIDTH=594 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=73>
+<COL WIDTH=72>
+<COL WIDTH=103>
+<COL WIDTH=84>
+<COL WIDTH=106>
+<COL WIDTH=58>
+<TR VALIGN=TOP>
+<TD WIDTH=73>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=72>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD COLSPAN=2 WIDTH=203>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">PegasusOperationMode
+Command</P>
+<P CLASS="western" ALIGN=CENTER>(2 Byte)</P>
+</TD>
+<TD WIDTH=106>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Pen/mouse
+LED</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=58>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">XY /</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">tablet</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=73>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=72>
+<P CLASS="western" ALIGN=CENTER>0x04</P>
+</TD>
+<TD WIDTH=103>
+<P CLASS="western" ALIGN=CENTER>0x80</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0xB5</P>
+</TD>
+<TD WIDTH=106>
+<P CLASS="western" ALIGN=CENTER>P/M LED</P>
+</TD>
+<TD WIDTH=58>
+<P CLASS="western" ALIGN=CENTER>Mode</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-left: 0.75in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in">P/M
+LED:
+</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x00 N.C.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x01 Pen LED</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x02 Mouse LED</P>
+<P CLASS="western" STYLE="margin-left: 1.38in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">
+Mode&nbsp;:</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x00 N.C.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x01 XY</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x02 Tablet</P>
+<P CLASS="western" STYLE="margin-left: 1.38in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><I>Scale &amp;
+Orientation command:</I></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Active area size
+scaling and device orientation setting <B><U>in tablet mode</U></B>.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Host	<FONT FACE="Wingdings">&#61664;</FONT>	Device</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<TABLE WIDTH=593 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=72>
+<COL WIDTH=73>
+<COL WIDTH=102>
+<COL WIDTH=93>
+<COL WIDTH=76>
+<COL WIDTH=80>
+<TR VALIGN=TOP>
+<TD WIDTH=72>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=73>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD COLSPAN=2 WIDTH=211>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">SetScaleOrientation</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Command</P>
+<P CLASS="western" ALIGN=CENTER>(2 Byte)</P>
+</TD>
+<TD WIDTH=76>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Scale</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">parameter</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=80>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Orientation</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">parameter</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=72>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=73>
+<P CLASS="western" ALIGN=CENTER>0x04</P>
+</TD>
+<TD WIDTH=102>
+<P CLASS="western" ALIGN=CENTER>0x80</P>
+</TD>
+<TD WIDTH=93>
+<P CLASS="western" ALIGN=CENTER>0xB6</P>
+</TD>
+<TD WIDTH=76>
+<P CLASS="western" ALIGN=CENTER>Scale</P>
+</TD>
+<TD WIDTH=80>
+<P CLASS="western" ALIGN=CENTER>Orint.</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-left: 0.75in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Orint:
+</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x00 Top</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x01 Left</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x02 Right</P>
+<P CLASS="western" STYLE="margin-left: 1.38in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Scale
+(active area size):</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0 (largest) &ndash; 9 (smallest)</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Erase memory:</B></I></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Erase all notes in
+memory.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Host	<FONT FACE="Wingdings">&#61664;</FONT>	Device</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=315 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=73>
+<COL WIDTH=121>
+<COL WIDTH=71>
+<TR VALIGN=TOP>
+<TD WIDTH=73 HEIGHT=22>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=121>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=71>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">XY
+</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Command</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=73 HEIGHT=22>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=121>
+<P CLASS="western" ALIGN=CENTER>0x01</P>
+</TD>
+<TD WIDTH=71>
+<P CLASS="western" ALIGN=CENTER>0xB0</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Upload:</B></I></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Upload data from device
+memory.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><U>Upload Sequence<B>:</B></U></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<OL>
+<LI><P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Request
+start of upload</B></I></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+Host <FONT FACE="Wingdings">&#61664;</FONT> Device</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=274 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=73>
+<COL WIDTH=83>
+<COL WIDTH=68>
+<TR VALIGN=TOP>
+<TD WIDTH=73 HEIGHT=22>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of
+</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=68>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Upload</P>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Command</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=73 HEIGHT=22>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER>0x01</P>
+</TD>
+<TD WIDTH=68>
+<P CLASS="western" ALIGN=CENTER>0xB5</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+<BR>
+</P>
+<OL START=2>
+<LI><P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Device sends
+the number of data packets to host.</B></I></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-left: 1in; margin-bottom: 0in">Device
+<FONT FACE="Wingdings">&#61664;</FONT> Host	</P>
+<P CLASS="western" STYLE="margin-left: 1in; margin-bottom: 0in">
+</P>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=526 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=46>
+<COL WIDTH=47>
+<COL WIDTH=47>
+<COL WIDTH=47>
+<COL WIDTH=47>
+<COL WIDTH=34>
+<COL WIDTH=42>
+<COL WIDTH=39>
+<COL WIDTH=34>
+<TR VALIGN=TOP>
+<TD COLSPAN=5 WIDTH=296>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Signature</P>
+<P CLASS="western" ALIGN=CENTER>(5 Bytes)</P>
+</TD>
+<TD COLSPAN=2 WIDTH=92>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of packets</P>
+<P CLASS="western" ALIGN=CENTER>(2 Bytes)</P>
+</TD>
+<TD COLSPAN=2 WIDTH=88>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Signature</P>
+<P CLASS="western" ALIGN=CENTER>(2 Bytes)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=46>
+<P CLASS="western" ALIGN=CENTER>0xAA</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0xAA</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0xAA</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0xAA</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0xAA</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>High</P>
+</TD>
+<TD WIDTH=42>
+<P CLASS="western" ALIGN=CENTER>Low</P>
+</TD>
+<TD WIDTH=39>
+<P CLASS="western" ALIGN=CENTER>0x55</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0x55</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+<P CLASS="western" STYLE="margin-left: 1in; margin-bottom: 0in"><BR>
+</P>
+<OL START=3>
+<LI><P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Host sends
+an ACK for receiving the data packets or NACK for cancel upload to
+device. </B></I>
+</P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+Host <FONT FACE="Wingdings">&#61664;</FONT> Device</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=301 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=83>
+<COL WIDTH=84>
+<COL WIDTH=84>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">ACK</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0x01</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0xB6</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=301 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=83>
+<COL WIDTH=84>
+<COL WIDTH=84>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">NACK</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0x01</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0xB7</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<OL START=4>
+<LI><P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Device sends
+upload data to host</B>.</I></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 0.75in; margin-bottom: 0in">
+Device <FONT FACE="Wingdings">&#61664;</FONT> Host</P>
+<P CLASS="western" style="margin-left: 0.75in; margin-bottom: 0in">
+<BR>
+</P>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=523 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=45>
+<COL WIDTH=46>
+<COL WIDTH=381>
+<TR VALIGN=TOP>
+<TD COLSPAN=2 WIDTH=108>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Packet
+number</P>
+<P CLASS="western" ALIGN=CENTER>(2 Bytes)</P>
+</TD>
+<TD WIDTH=381>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Data</P>
+<P CLASS="western" ALIGN=CENTER>(62 Bytes)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD COLSPAN=2 WIDTH=108>
+<P CLASS="western" ALIGN=CENTER>N</P>
+</TD>
+<TD ROWSPAN=2 WIDTH=381>
+<P CLASS="western" ALIGN=CENTER>Upload Data</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>High</P>
+</TD>
+<TD WIDTH=46>
+<P CLASS="western" ALIGN=CENTER>Low</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+<P CLASS="western" style="margin-left: 1.25in; margin-bottom: 0in">
+N &ndash; Sequence number, each packet gets a sequence
+number(starting with 1), e.g. the first packet gets sequence number
+1, the second 2 etc..</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<OL START=5>
+<LI><P CLASS="western" STYLE="margin-bottom: 0in"><B><I>Packets
+retransmission</I>.</B></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+Host <FONT FACE="Wingdings">&#61664;</FONT> Device</P>
+<P CLASS="western" STYLE="margin-left: 1in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 0.25in; margin-bottom: 0in">
+<B><I>5.a.</I></B> In case all packets have been received
+successfully, the host sends an ACK</P>
+<P CLASS="western" style="margin-left: 0.25in; margin-bottom: 0in">
+response and the upload sequence is complete.</P>
+<P CLASS="western" style="margin-left: 0.25in; margin-bottom: 0in">
+<BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=301 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=83>
+<COL WIDTH=84>
+<COL WIDTH=84>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">ACK</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0x01</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0xB6</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" style="margin-left: 0.25in; margin-bottom: 0in">
+<BR>
+</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"><B><I>5.b.</I></B>
+In case some packets have been lost the host sends a NACK response
+with</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in">
+the lost packet number.</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<DL>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=501 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=83>
+<COL WIDTH=84>
+<COL WIDTH=84>
+<COL WIDTH=84>
+<COL WIDTH=84>
+<TR VALIGN=TOP>
+<TD WIDTH=83>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Number
+of Bytes</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">NACK</P>
+<P CLASS="western" ALIGN=CENTER>(1 Byte)</P>
+</TD>
+<TD COLSPAN=2 WIDTH=184>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Lost
+packet number</P>
+<P CLASS="western" ALIGN=CENTER>(2 Byte)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD ROWSPAN=2 WIDTH=83>
+<P CLASS="western" ALIGN=CENTER>0x02</P>
+</TD>
+<TD ROWSPAN=2 WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0x03</P>
+</TD>
+<TD ROWSPAN=2 WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>0xB7</P>
+</TD>
+<TD COLSPAN=2 WIDTH=184>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>High</P>
+</TD>
+<TD WIDTH=84>
+<P CLASS="western" ALIGN=CENTER>Low</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+</DL>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"> X
+&ndash; Lost packet number.</P>
+<P CLASS="western" STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<OL START=6>
+<LI><P CLASS="western" STYLE="margin-bottom: 0in"><I><B>Device send
+the lost packet to host (return to stage 5).</B></I></P>
+</OL>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style="margin-left: 0.75in; margin-bottom: 0in">
+Device <FONT FACE="Wingdings">&#61664;</FONT> Host</P>
+<P CLASS="western" style="margin-left: 0.75in; margin-bottom: 0in">
+<BR>
+</P>
+<DL>
+<DL>
+<DD>
+<TABLE WIDTH=523 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=45>
+<COL WIDTH=46>
+<COL WIDTH=381>
+<TR VALIGN=TOP>
+<TD COLSPAN=2 WIDTH=108>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Packet
+number</P>
+<P CLASS="western" ALIGN=CENTER>(2 Bytes)</P>
+</TD>
+<TD WIDTH=381>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Data</P>
+<P CLASS="western" ALIGN=CENTER>(62 Bytes)</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD COLSPAN=2 WIDTH=108>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD ROWSPAN=2 WIDTH=381>
+<P CLASS="western" ALIGN=CENTER>Upload Data</P>
+</TD>
+</TR>
+<TR VALIGN=TOP>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>High</P>
+</TD>
+<TD WIDTH=46>
+<P CLASS="western" ALIGN=CENTER>Low</P>
+</TD>
+</TR>
+</TABLE>
+</DL>
+</DL>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+X &ndash; Lost packet number.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in; page-break-before: always">
+<FONT SIZE=4>2. </FONT><B><FONT SIZE=4><font size="5">Device
+to Host.</font></FONT></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><FONT SIZE=4>a. Data
+Packets:</FONT></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><I>PEN-DATA packet
+(XY mode):</I></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">PEN-DATA packets (XY
+mode) are send via endpoint1.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Device	<FONT FACE="Wingdings">&#61664;</FONT>	Host</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<TABLE WIDTH=596 BORDER=3 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=41>
+<COL WIDTH=107>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=40>
+<COL WIDTH=38>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER><B>Byte #</B></P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Byte</B></P>
+<P CLASS="western" ALIGN=CENTER><B>Name</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>7</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>6</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>5</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>4</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>3</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>2</B></P>
+</TD>
+<TD WIDTH=40>
+<P CLASS="western" ALIGN=CENTER><B>1</B></P>
+</TD>
+<TD WIDTH=38>
+<P CLASS="western" ALIGN=CENTER><B>0</B></P>
+</TD>
+</TR>
+<TR></TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>status</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD COLSPAN=2 WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Battery state</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>Color</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>Hov</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=40>
+<P CLASS="western" ALIGN=CENTER>Sw1</P>
+</TD>
+<TD WIDTH=38>
+<P CLASS="western" ALIGN=CENTER>Tip</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>2</P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>X low</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=40>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=38>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>3</P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>X high</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=40>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=38>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>4</P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>Y low</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=40>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=38>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>5</P>
+</TD>
+<TD WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>Y high</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>X</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=40>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=38>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-left: 0.75in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Battery
+state:</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x00 no state report</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x01 battery low report</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x02 battery good report</P>
+<P CLASS="western" style=" margin-bottom: 0in">Color:</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+Tip = 1 if tip was pressed, otherwise 0.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+Switch-1 = 1 if tip was pressed, otherwise 0.</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+Hovering = 1 if the pen is moving at the air and no switch was
+pressed.
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><I>PEN-UP packet (XY
+mode):</I></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">PEN-UP packets (XY
+mode) are send via endpoint1.</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Device	<FONT FACE="Wingdings">&#61664;</FONT>	Host</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<TABLE WIDTH=596 BORDER=3 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=41>
+<COL WIDTH=94>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=47>
+<COL WIDTH=45>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER><B>Byte #</B></P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Byte</B></P>
+<P CLASS="western" ALIGN=CENTER><B>Name</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>7</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>6</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>5</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>4</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>3</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>2</B></P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER><B>1</B></P>
+</TD>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER><B>0</B></P>
+</TD>
+</TR>
+<TR></TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Status</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD COLSPAN=2 WIDTH=107>
+<P CLASS="western" ALIGN=CENTER>Battery state</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Color</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>2</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>X low</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>3</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>X high</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>4</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Y low</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>5</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Y high</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=45>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-left: 0.75in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" style=" margin-bottom: 0in">Battery
+state (as in DATA packet above):</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x00 no state report</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x01 battery low report</P>
+<P CLASS="western" style="margin-left: 0.5in; margin-bottom: 0in">
+0x02 battery good report</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><I>PEN-DATA packet
+(<U>only in tablet mode</U>):</I></B></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">PEN-DATA packets (only
+in tablet mode) are send via endpoint2.</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Device	<FONT FACE="Wingdings">&#61664;</FONT>	Host</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<TABLE WIDTH=587 BORDER=3 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=41>
+<COL WIDTH=94>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=47>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=34>
+<COL WIDTH=35>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER><B>Byte #</B></P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Byte</B></P>
+<P CLASS="western" ALIGN=CENTER><B>Name</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>7</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>6</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>5</B></P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER><B>4</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>3</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>2</B></P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER><B>1</B></P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER><B>0</B></P>
+</TD>
+</TR>
+<TR></TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in">Report
+ID</P>
+<P CLASS="western" ALIGN=CENTER>(0x08)</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>X low</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>2</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>X high</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>3</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Y low</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>4</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Y high</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>5</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Tablet State</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>In range</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>SW2</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>SW1</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>Tip</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>6</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Tip Pressure LSB</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=41>
+<P CLASS="western" ALIGN=CENTER>7</P>
+</TD>
+<TD WIDTH=94>
+<P CLASS="western" ALIGN=CENTER>Tip Pressure MSB</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=47>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=34>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+<TD WIDTH=35>
+<P CLASS="western" ALIGN=CENTER>x</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><B><FONT SIZE=4>b.
+Answer for received commands</FONT></B>:</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Answer for received
+commands are send via endpoint1.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Version request: the
+description for version request is described before (at Host to
+device special commands version request).
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Upload request: the
+description for upload request is described before (at Host to device
+special commands version request).</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><FONT SIZE=4>c.
+<B>Device commands:</B></FONT></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Device
+commands are send via
+endpoint1.</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><I><B>MODE_BUTTON:</B></I></P>
+<P CLASS="western" STYLE="margin-bottom: 0in">Change
+mode (pen/mouse) command.</P>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in">
+<BR>
+</P>
+<TABLE WIDTH=596 BORDER=3 BORDERCOLOR="#000000" CELLPADDING=8 CELLSPACING=0>
+<COL WIDTH=39>
+<COL WIDTH=136>
+<COL WIDTH=32>
+<COL WIDTH=32>
+<COL WIDTH=32>
+<COL WIDTH=32>
+<COL WIDTH=32>
+<COL WIDTH=32>
+<COL WIDTH=31>
+<COL WIDTH=31>
+<TR>
+<TD WIDTH=39>
+<P CLASS="western" ALIGN=CENTER><B>Byte #</B></P>
+</TD>
+<TD WIDTH=136>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><B>Byte</B></P>
+<P CLASS="western" ALIGN=CENTER><B>Name</B></P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER><B>7</B></P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER><B>6</B></P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER><B>5</B></P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER><B>4</B></P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER><B>3</B></P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER><B>2</B></P>
+</TD>
+<TD WIDTH=31>
+<P CLASS="western" ALIGN=CENTER><B>1</B></P>
+</TD>
+<TD WIDTH=31>
+<P CLASS="western" ALIGN=CENTER><B>0</B></P>
+</TD>
+</TR>
+<TR></TR>
+<TR>
+<TD WIDTH=39>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=136>
+<P CLASS="western" ALIGN=CENTER STYLE="margin-bottom: 0in"><FONT SIZE=2>SPECIAL_COMMAND</FONT></P>
+<P CLASS="western" ALIGN=CENTER>(0x80)</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=31>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=31>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+</TR>
+<TR>
+<TD WIDTH=39>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=136>
+<P CLASS="western" ALIGN=CENTER>Command (0xB5)</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=32>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+<TD WIDTH=31>
+<P CLASS="western" ALIGN=CENTER>0</P>
+</TD>
+<TD WIDTH=31>
+<P CLASS="western" ALIGN=CENTER>1</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="western" STYLE="margin-left: 0.25in; margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+</P>
+<br>
+<br clear="all"/>
+</div>
+<div id="google-view-footer">
+<div id="maybecanedit" style="float:right">
+<a class="google-small-link"
+           id="editpermissionlink"
+           
+             href="Edit?tab=edit&dr=true&docid=dqswcdk_7f7h4n2db"
+           
+           title="Edit this page">
+Edit this page (if you have permission)</a>
+<span style="color:#676767;">|</span>
+<input id="report-abuse-button" type="button"
+         value="Report abuse" onclick="reportAbuse();">
+</div>
+<div style="float:left">
+<a title="Learn more about Google Docs"
+            class="google-small-link"
+            href="/">
+Google Docs -- Web word processing, presentations and spreadsheets.</a>
+</div>
+<p> &nbsp;
+</div>
+<script><!--
+    viewOnLoad();
+    
+    
+    var urchinPage = "/View";
+
+    
+    function getXHR() {
+      if (typeof XMLHttpRequest != "undefined") {
+        return new XMLHttpRequest();
+      }
+      try { return new ActiveXObject("Msxml2.XMLHTTP.6.0") } catch(e) {}
+      try { return new ActiveXObject("Msxml2.XMLHTTP.3.0") } catch(e) {}
+      try { return new ActiveXObject("Msxml2.XMLHTTP") } catch(e) {}
+      try { return new ActiveXObject("Microsoft.XMLHTTP") } catch(e) {}
+      return null;
+    }
+
+    function reportAbuse() {
+      var req = getXHR();
+      if (req) {
+        
+          var docid = 'dqswcdk_7f7h4n2db';
+          var posttoken = '';
+        
+        req.onreadystatechange = function() {
+          try {
+            if (req.readyState == 4 && req.status == 200) {
+              var button = document.getElementById("report-abuse-button");
+              button.value = 'Thank you!';
+              button.disabled = true;
+            }
+          } catch (ex) {
+            
+          }
+        }
+        try {
+          req.open('POST', 'MiscCommands', true);
+          req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+          req.send('command=report_abuse&abuseDoc=' + encodeURIComponent(docid) +
+                   '&POST_TOKEN=' + encodeURIComponent(posttoken));
+        } catch (ex) {
+          
+        }
+      }
+    }
+  --></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+* make a good README
+* make available as a packaged Python egg(? python-hid-pegtool?)
+* Sample Polling Applications
+* create wrapper that emulates Pegasus C++/.NET SDK?
+* add comments to more code
+* create tests(?)
+//EOF
