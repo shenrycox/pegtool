@@ -1,0 +1,27 @@
+Copyright 2009 Tim Dedischew, released under the GPL v2
+Pegasus Digital Pen USB command-line tool
+
+WARNING: this is just a hobby project right now
+WARNING:    and still very pre-alpha state
+WARNING:    Not ready for general use just yet!
+WARNING:  /tjd 2009.03.22
+
+TODO: Changelog?
+
+--- TODO: requirements and  dependencies ---
+The following system packages are needed (maybe more depending on your 
+os):
+
+* Python 2.5+
+* libhid0
+* python-hid (this might depend on libhid-dev) 
+-------
+
+Kudos and Thanks to:
+  Fufu Fang <fangfufu2003@gmail.com>
+    * brainstorming help
+    * bugging me to get this released ;)
+  Pegasus Technologys Ltd.
+    * releasing the XY and memory protocol docs that make possible
+
+//EOF
